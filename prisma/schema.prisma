@@ -13,6 +13,15 @@ generator client {
 //  url      = "mysql://root:root@localhost:3306/Faq"
 //}
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
 model Session {
   id            String    @id
   shop          String  
