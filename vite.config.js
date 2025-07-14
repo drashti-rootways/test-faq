@@ -1,4 +1,4 @@
-import { vitePlugin as remix } from "@remix-run/dev";
+import vercel from "@vercel/remix/vite";
 import { installGlobals } from "@remix-run/node";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -74,6 +74,7 @@ export default defineConfig({
         v3_routeConfig: true,
       },
     }),
+     vercel(),
     tsconfigPaths(),
   ],
   build: {
