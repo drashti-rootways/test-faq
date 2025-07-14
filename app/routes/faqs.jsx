@@ -1,5 +1,18 @@
 import { json } from "@remix-run/node";
 import prisma from "../db.server";
+export async function loader({ request }) {
+  try {
+    console.log("✅ faqapi loader hit");
+    const { session } = await authenticate.admin(request);
+    console.log("✅ Session:", session);
+
+    // Your DB code here
+    return json({ status: "ok" });
+  } catch (error) {
+    console.error("❌ FAQ API loader error", error);
+    throw new Response("Internal Server Error", { status: 500 });
+  }
+}
 
 export const action = async ({ request }) => {
   try {
