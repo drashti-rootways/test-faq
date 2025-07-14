@@ -5,21 +5,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 installGlobals({ nativeFetch: true });
 
-// Related: https://github.com/remix-run/remix/issues/2835#issuecomment-1144102176
-// Replace the HOST env var with SHOPIFY_APP_URL so that it doesn't break the remix server. The CLI will eventually
-// stop passing in HOST, so we can remove this workaround after the next major release.
-if (
-  process.env.HOST &&
-  (!process.env.SHOPIFY_APP_URL ||
-    process.env.SHOPIFY_APP_URL === process.env.HOST)
-) {
-  process.env.SHOPIFY_APP_URL = process.env.HOST;
-  delete process.env.HOST;
-}
-
-// const host = new URL(process.env.SHOPIFY_APP_URL || "http://localhost")
-//   .hostname;
-// let hmrConfig;
 function ensureValidUrl(input) {
   if (!input) {
     return "http://localhost";
@@ -29,10 +14,12 @@ function ensureValidUrl(input) {
   }
   return input;
 }
+
 const rawUrl = process.env.SHOPIFY_APP_URL;
 const fullUrl = ensureValidUrl(rawUrl);
-const host = new URL(fullUrl).hostname;  // <-- host declared here
-let hmrConfig; // Declare first
+const host = new URL(fullUrl).hostname;
+
+let hmrConfig;
 if (host === "localhost") {
   hmrConfig = {
     protocol: "ws",
@@ -58,23 +45,11 @@ export default defineConfig({
     port: Number(process.env.PORT || 3000),
     hmr: hmrConfig,
     fs: {
-      // See https://vitejs.dev/config/server-options.html#server-fs-allow for more information
       allow: ["app", "node_modules"],
     },
   },
   plugins: [
-    remix({
-      ignoredRouteFiles: ["**/.*"],
-      future: {
-        v3_fetcherPersist: true,
-        v3_relativeSplatPath: true,
-        v3_throwAbortReason: true,
-        v3_lazyRouteDiscovery: true,
-        v3_singleFetch: false,
-        v3_routeConfig: true,
-      },
-    }),
-     vercel(),
+    vercel(), // ✅ only this plugin
     tsconfigPaths(),
   ],
   build: {
