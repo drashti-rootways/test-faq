@@ -17,10 +17,18 @@ if (
   delete process.env.HOST;
 }
 
-const host = new URL(process.env.SHOPIFY_APP_URL || "http://localhost")
-  .hostname;
-let hmrConfig;
-
+// const host = new URL(process.env.SHOPIFY_APP_URL || "http://localhost")
+//   .hostname;
+// let hmrConfig;
+function ensureValidUrl(input) {
+  if (!input) {
+    return "http://localhost";
+  }
+  if (!input.startsWith("http://") && !input.startsWith("https://")) {
+    return "https://" + input;
+  }
+  return input;
+}
 if (host === "localhost") {
   hmrConfig = {
     protocol: "ws",
