@@ -1,14 +1,14 @@
-import vercel from "@vercel/remix/vite";
-import { installGlobals } from "@remix-run/node";
 import { defineConfig } from "vite";
+import vercel from "@vercel/remix"; // ✅ Only use the default export
+import { vitePlugin as remix } from "@remix-run/dev";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { installGlobals } from "@remix-run/node";
 
 installGlobals({ nativeFetch: true });
 
+// Handle Shopify app URL logic
 function ensureValidUrl(input) {
-  if (!input) {
-    return "http://localhost";
-  }
+  if (!input) return "http://localhost";
   if (!input.startsWith("http://") && !input.startsWith("https://")) {
     return "https://" + input;
   }
@@ -49,13 +49,14 @@ export default defineConfig({
     },
   },
   plugins: [
-    vercel(), // ✅ only this plugin
-    tsconfigPaths(),
+    remix(),      // ✅ REQUIRED: Remix vite plugin
+    vercel,          // ✅ This is all you need from @vercel/remix
+    tsconfigPaths(),   // Optional: resolves `tsconfig.json` paths
   ],
-  build: {
-    assetsInlineLimit: 0,
-  },
   optimizeDeps: {
     include: ["@shopify/app-bridge-react", "@shopify/polaris"],
+  },
+  build: {
+    assetsInlineLimit: 0,
   },
 });
