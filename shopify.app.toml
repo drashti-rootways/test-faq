@@ -3,7 +3,7 @@
 client_id = "06564b7f8c2c9479fdc47c7221136eac"
 name = "drashti-test-faq"
 handle = "drashti-test-faq"
-application_url = "https://break-barry-coordinate-phones.trycloudflare.com"
+application_url = "https://name-dot-vinyl-legacy.trycloudflare.com"
 embedded = true
 
 [build]
@@ -26,7 +26,7 @@ api_version = "2025-04"
 scopes = "write_products"
 
 [auth]
-redirect_urls = ["https://break-barry-coordinate-phones.trycloudflare.com/auth/callback", "https://break-barry-coordinate-phones.trycloudflare.com/auth/shopify/callback", "https://break-barry-coordinate-phones.trycloudflare.com/api/auth/callback"]
+redirect_urls = ["https://name-dot-vinyl-legacy.trycloudflare.com/auth/callback", "https://name-dot-vinyl-legacy.trycloudflare.com/auth/shopify/callback", "https://name-dot-vinyl-legacy.trycloudflare.com/api/auth/callback"]
 
 [pos]
 embedded = false
