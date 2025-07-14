@@ -29,6 +29,9 @@ function ensureValidUrl(input) {
   }
   return input;
 }
+const rawUrl = process.env.SHOPIFY_APP_URL;
+const fullUrl = ensureValidUrl(rawUrl);
+const host = new URL(fullUrl).hostname;  // <-- host declared here
 if (host === "localhost") {
   hmrConfig = {
     protocol: "ws",
