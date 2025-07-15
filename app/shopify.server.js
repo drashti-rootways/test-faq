@@ -24,6 +24,7 @@ const shopify = shopifyApp({
     ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
     : {}),
 });
+console.log("APP URL:", process.env.SHOPIFY_APP_URL);
 
 export default shopify;
 export const apiVersion = ApiVersion.January25;
