@@ -3,7 +3,7 @@
 client_id = "06564b7f8c2c9479fdc47c7221136eac"
 name = "drashti-test-faq"
 handle = "drashti-test-faq"
-application_url = "https://of-silicon-tutorial-mostly.trycloudflare.com"
+application_url = "https://n-explanation-offered-tommy.trycloudflare.com"
 embedded = true
 
 [build]
@@ -26,7 +26,7 @@ api_version = "2025-04"
 scopes = "write_products"
 
 [auth]
-redirect_urls = ["https://of-silicon-tutorial-mostly.trycloudflare.com/auth/callback", "https://of-silicon-tutorial-mostly.trycloudflare.com/auth/shopify/callback", "https://of-silicon-tutorial-mostly.trycloudflare.com/api/auth/callback"]
+redirect_urls = ["https://n-explanation-offered-tommy.trycloudflare.com/auth/callback", "https://n-explanation-offered-tommy.trycloudflare.com/auth/shopify/callback", "https://n-explanation-offered-tommy.trycloudflare.com/api/auth/callback"]
 
 [pos]
 embedded = false
