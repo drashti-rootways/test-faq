@@ -3,7 +3,8 @@
 client_id = "06564b7f8c2c9479fdc47c7221136eac"
 name = "drashti-test-faq"
 handle = "drashti-test-faq"
-application_url = "https://organizations-physics-reaching-drilling.trycloudflare.com"
+application_url = "https://test-faq-alpha.vercel.app"
+
 embedded = true
 
 [build]
@@ -26,7 +27,9 @@ api_version = "2025-04"
 scopes = "write_products"
 
 [auth]
-redirect_urls = ["https://organizations-physics-reaching-drilling.trycloudflare.com/auth/callback", "https://organizations-physics-reaching-drilling.trycloudflare.com/auth/shopify/callback", "https://organizations-physics-reaching-drilling.trycloudflare.com/api/auth/callback"]
+redirect_urls = ["https://test-faq-alpha.vercel.app/auth/callback",
+  "https://test-faq-alpha.vercel.app/auth/shopify/callback",
+  "https://test-faq-alpha.vercel.app/api/auth/callback"]
 
 [pos]
 embedded = false
