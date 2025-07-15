@@ -7,12 +7,31 @@ import {
 import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prisma";
 import prisma from "./db.server";
 
+// const shopify = shopifyApp({
+//   apiKey: process.env.SHOPIFY_API_KEY,
+//   apiSecretKey: process.env.SHOPIFY_API_SECRET || "",
+//   apiVersion: ApiVersion.January25,
+//   scopes: process.env.SCOPES?.split(","),
+//   appUrl: process.env.SHOPIFY_APP_URL || "",
+//   authPathPrefix: "/auth",
+//   sessionStorage: new PrismaSessionStorage(prisma),
+//   distribution: AppDistribution.AppStore,
+//   future: {
+//     unstable_newEmbeddedAuthStrategy: true,
+//     removeRest: true,
+//   },
+//   ...(process.env.SHOP_CUSTOM_DOMAIN
+//     ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
+//     : {}),
+// });
 const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
   apiSecretKey: process.env.SHOPIFY_API_SECRET || "",
   apiVersion: ApiVersion.January25,
   scopes: process.env.SCOPES?.split(","),
-  appUrl: process.env.SHOPIFY_APP_URL || "",
+  appUrl: process.env.SHOPIFY_APP_URL?.startsWith("http")
+    ? process.env.SHOPIFY_APP_URL
+    : `https://${process.env.SHOPIFY_APP_URL}`,
   authPathPrefix: "/auth",
   sessionStorage: new PrismaSessionStorage(prisma),
   distribution: AppDistribution.AppStore,
@@ -24,6 +43,10 @@ const shopify = shopifyApp({
     ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
     : {}),
 });
+if (!process.env.SHOPIFY_APP_URL?.startsWith("https://")) {
+  console.warn("⚠️ Invalid SHOPIFY_APP_URL format. Must include https://");
+}
+
 console.log("APP URL:", process.env.SHOPIFY_APP_URL);
 
 export default shopify;
